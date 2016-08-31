@@ -1,13 +1,13 @@
 # RedisCache
 RedisCache is redis command package for Go.
 
-[![Build Status](https://travis-ci.org/clevergo/cache.svg?branch=master)](https://travis-ci.org/clevergo/cache)
+[![Build Status](https://travis-ci.org/clevergo/rediscache.svg?branch=master)](https://travis-ci.org/clevergo/rediscache)
 
 
 # Documentation
 ## Installation
 ```
-go get github.com/clevergo/cache
+go get github.com/clevergo/rediscache
 ```
 
 ## Example
@@ -15,17 +15,17 @@ go get github.com/clevergo/cache
 package main
 
 import (
-	"github.com/clevergo/cache"
+	"github.com/clevergo/rediscache"
 	"fmt"
 )
 
 func main() {
     // Create a redis pool.
-	pool := cache.NewRedisPool(100, 300, "tcp", ":6379", "", "")
+	pool := rediscache.NewRedisPool(100, 300, "tcp", ":6379", "", "")
 	defer pool.Close()
 
     // Create RedisCache
-	rc := cache.NewRedisCache(pool)
+	rc := rediscache.NewRedisCache(pool)
 
     var reply interface{}
     var err error

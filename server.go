@@ -8,7 +8,7 @@ func (c *Connection) FlushDb() error {
 }
 
 // FLUSHALL Command.
-// @return error, returns non-nil error if error was reached.
+// Returns non-nil error if error was reached.
 func (c *Connection) FlushAll() error {
 	_, err := c.Execute("FLUSHALL")
 	return err

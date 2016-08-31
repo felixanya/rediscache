@@ -1,7 +1,7 @@
-package cache_test
+package rediscache_test
 
 import (
-	"github.com/clevergo/cache"
+	"github.com/clevergo/rediscache"
 	"github.com/garyburd/redigo/redis"
 	"strings"
 	"testing"
@@ -18,10 +18,10 @@ var (
 )
 
 func TestAll(t *testing.T) {
-	pool := cache.NewRedisPool(maxIdle, idleTimeout, network, address, password, db)
+	pool := rediscache.NewRedisPool(maxIdle, idleTimeout, network, address, password, db)
 	defer pool.Close()
 
-	c := cache.NewRedisCache(pool)
+	c := rediscache.NewRedisCache(pool)
 
 	conn := c.GetConn()
 

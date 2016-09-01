@@ -63,14 +63,16 @@ func (c *Connection) MSet(args ...interface{}) error {
 // @param string value.
 // @param []string args, args[0] can be set as 'EX seconds', 'PX milliseconds', 'NX' OR 'XX'.
 // @return boolean and error.
-func (c *Connection) Set(key, value string, args ...[]string) (bool, error) {
+func (c *Connection) Set(key, value string, args ...interface{}) (bool, error) {
 	var reply string
 	var err error
 
 	if len(args) == 0 {
 		reply, err = redis.String(c.Execute("SET", key, value))
 	} else {
-		reply, err = redis.String(c.Execute("SET", key, value, args[0]))
+		_args := []interface{}{key, value}
+		_args = append(_args, args...)
+		reply, err = redis.String(c.Execute("SET", _args...))
 	}
 
 	if err != nil {

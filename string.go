@@ -1,7 +1,6 @@
 package rediscache
 
 import (
-	"fmt"
 	"github.com/garyburd/redigo/redis"
 )
 
@@ -63,7 +62,7 @@ func (c *Connection) MSet(args ...interface{}) error {
 // @param string value.
 // @param []string args, args[0] can be set as 'EX seconds', 'PX milliseconds', 'NX' OR 'XX'.
 // @return boolean and error.
-func (c *Connection) Set(key, value string, args ...interface{}) (bool, error) {
+func (c *Connection) Set(key, value string, args ...interface{}) error {
 	var reply string
 	var err error
 
@@ -76,14 +75,10 @@ func (c *Connection) Set(key, value string, args ...interface{}) (bool, error) {
 	}
 
 	if err != nil {
-		return false, err
+		return err
 	}
 
-	if IsReplyOk(reply) && (err == nil) {
-		return true, nil
-	}
-
-	return false, fmt.Errorf(reply)
+	return nil
 }
 
 // SETRANGE Command.

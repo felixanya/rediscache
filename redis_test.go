@@ -39,9 +39,9 @@ func TestAll(t *testing.T) {
 	}
 
 	// Set Command.
-	ok, err := conn.Set(key, "string_key")
+	err = conn.Set(key, "string_key")
 	if err != nil {
-		t.Error("Set command error: %s, %v", ok, err)
+		t.Error("Set command error: %v", err)
 	}
 
 	getReply, err = conn.Get(key)
